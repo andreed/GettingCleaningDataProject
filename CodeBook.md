@@ -3,22 +3,22 @@
 ## for both files train_test.txt and train_test_mean.txt
 The files have the following columns
 
-activity
+* activity
 	telling what activity has been performed when the measurements of this row have been taken, possible values are:
-		- WALKING
-		- WALKING_UPSTAIRS
-		- WALKING_DOWNSTAIRS
-		- SITTING
-		- STANDING
-		- LAYING
+		* WALKING
+		* WALKING_UPSTAIRS
+		* WALKING_DOWNSTAIRS
+		* SITTING
+		* STANDING
+		* LAYING
 		
-subject
+* subject
 	identifier of test persons, so different activities can be assigned to the same person for further investigations
-		- 30 test persons are being referred by numbers 1 to 30
+		* 30 test persons are being referred by numbers 1 to 30
 		
-further columns are the measurements, where only the mean and standard deviations have been included into the files
-	tBodyAcc_mean_X
-	tBodyAcc_mean_Y
+* further columns are the measurements, where only the mean and standard deviations have been included into the files
+	* tBodyAcc_mean_X
+	* tBodyAcc_mean_Y
 	tBodyAcc_mean_Z
 	tBodyAcc_std_X
 	tBodyAcc_std_Y
