@@ -3,7 +3,7 @@ library(readr)
 library(dplyr)
 
 # I stored the data files not in the github clone to avoid them being uploaded to github 
-directory <- "C:/Users/Andre/Documents/Coursera/data/UCIHARDataset/"
+directory <- "./UCIHARDataset/"
 
 # one function to read in one set of files and return an consolidated
 # dataframe - the parameter "filename" should either contain test or train
@@ -14,22 +14,31 @@ read_files_to_df <- function(directory, filename, col_names, activity_lbls) {
     # -1- Read in and work on the measurements
     df_x <- read_table(paste0(directory,filename,"/X_",filename,".txt"),
                        col_names=x_cols$features_clr)
-    # get only the colums with the mean or the standard deviation 
-    df_x <- select(df_x, matches("mean_|std_"))    
     
-    # -2- Read in and enrich the acitivities
+    # -2- Read in the acitivities
     df_y <- read_table(paste0(directory,filename,"/y_",filename,".txt"),
                        col_names="activity_id")
-    df_y <- merge(df_y,activity_lbls,all.x=TRUE)
-    df_y <- select(df_y,activity)
     
     # -3- Read in the subject file
     df_subject <- read_table(paste0(directory,filename,"/subject_",filename,".txt"),
                              col_names="subject")
-
-
     
-    df_all <- tbl_df(cbind(df_y, df_subject, df_x))
+    df_all <- cbind(df_x, df_subject, df_y)
+    # get only the colums with the mean or the standard deviation, be sure to keep activity and subject
+    df_all <- select(df_all, matches("mean_|std_|activity|subject"))
+    
+    # add the text for the activity_id
+    df_all <- merge(df_all,activity_lbls,all.x=TRUE)
+    # take out the activity_id
+    df_all <- select(df_all,-activity_id)
+    # I want to have the activity and the subject as the first two columns, so
+    # .... I first store the number of colums of df_all at this point of time
+    df_col_nr <- ncol(df_all)    
+    # ... and now specify, that I want to have activity and subject and then all columns. select is clever
+    # ... enough to not inlcude activity and subject again
+    df_all <- select(df_all,activity,subject,1:df_col_nr)
+    # coerce the data frame to a data frame table
+    df_all <- tbl_df(df_all)
     df_all
 }
 
@@ -66,6 +75,6 @@ df_mean <- df_both %>% group_by(activity,subject) %>% summarise_each(funs(mean))
 df_col_names <- as.data.frame(names(df_both))
 write_tsv(df_col_names,"./Col_names.txt",col_names=FALSE)
 # write out the file with both data
-write_tsv(df_both,"./train_text.txt",col_names=FALSE)
+write_tsv(df_both,"./train_test.txt",col_names=FALSE)
 # write out the file with the means
-write_tsv(df_mean,"./train_text_mean.txt",col_names=FALSE)
+write_tsv(df_mean,"./train_test_mean.txt",col_names=FALSE)
