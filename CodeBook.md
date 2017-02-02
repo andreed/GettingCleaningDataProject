@@ -3,14 +3,13 @@
 ## for both files train_test.txt and train_test_mean.txt
 The files have the following columns
 
-* activity
-	telling what activity has been performed when the measurements of this row have been taken, possible values are:
-		* WALKING
-		* WALKING_UPSTAIRS
-		* WALKING_DOWNSTAIRS
-		* SITTING
-		* STANDING
-		* LAYING
+* activity - telling what activity has been performed when the measurements of this row have been taken, possible values are:
+	* WALKING
+	* WALKING_UPSTAIRS
+	* WALKING_DOWNSTAIRS
+	* SITTING
+	* STANDING
+	* LAYING
 		
 * subject
 	identifier of test persons, so different activities can be assigned to the same person for further investigations
