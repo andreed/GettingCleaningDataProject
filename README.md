@@ -42,8 +42,8 @@ The rest of the script prepares the arguments for calling function read_files_to
 * The file "activity_labels.txt" contains the labels of the activities. This file is read into a data frame and passed to read_files_to_df
 * in lines 65 and 66, the files for "test" and "train" are read into two data frame tables using read_file_to_df
 * both data frame tables are then put together using rbind. df_both now contains a tidy data frame for the measurements, activities and subjects
-* the mean values per activity and subject are calculated with summarise_each with grouping the complete data frame table by these two columns before
+* the mean values per activity and subject are calculated with summarise_each() with grouping the complete data frame table by these two columns before
 
 Writing out the files
 * I decided to write out one file with the column names to be able to refer to it from the codebook
-* The two data files don't contain the column names.
+* The two data files don't contain the column names. When reading them into R with read.table, the file Col_names.txt can be used to prepare a vector of column names before.
