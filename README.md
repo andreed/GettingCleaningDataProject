@@ -41,5 +41,5 @@ The rest of the script prepares the arguments for calling function read_files_to
 * the mean values per activity and subject are calculated with summarise_each with grouping the complete data frame table by these two columns before
 
 Writing out the files
-* I decided to also write out one file with the column names to be able to refer to it from the codebook
-* I also decided to write out the data frame tables to files containing the column names, as this makes it easier to import them again.
+* I decided to write out one file with the column names to be able to refer to it from the codebook
+* The two data files don't contain the column names.

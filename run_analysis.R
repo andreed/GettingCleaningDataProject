@@ -2,6 +2,9 @@
 library(readr)
 library(dplyr)
 
+# I stored the data files not in the github clone to avoid them being uploaded to github 
+directory <- "C:/Users/Andre/Documents/Coursera/data/UCIHARDataset/"
+
 # one function to read in one set of files and return an consolidated
 # dataframe - the parameter "filename" should either contain test or train
 read_files_to_df <- function(directory, filename, col_names, activity_lbls) {
@@ -29,9 +32,6 @@ read_files_to_df <- function(directory, filename, col_names, activity_lbls) {
     df_all <- tbl_df(cbind(df_y, df_subject, df_x))
     df_all
 }
-
-# I stored the data files not in the github clone to avoid them being uploaded to github 
-directory <- "C:/Users/Andre/Documents/Coursera/data/UCIHARDataset/"
 
 # first, get the column names for the file X_xxx, to achieve this, read in the features.txt
 # this can be used for both files X_test.txt and X_train.txt, so I do it once outside the function
@@ -66,6 +66,6 @@ df_mean <- df_both %>% group_by(activity,subject) %>% summarise_each(funs(mean))
 df_col_names <- as.data.frame(names(df_both))
 write_tsv(df_col_names,"./Col_names.txt",col_names=FALSE)
 # write out the file with both data
-write_tsv(df_both,"./train_text.txt")
+write_tsv(df_both,"./train_text.txt",col_names=FALSE)
 # write out the file with the means
-write_tsv(df_mean,"./train_text_mean.txt")
+write_tsv(df_mean,"./train_text_mean.txt",col_names=FALSE)
